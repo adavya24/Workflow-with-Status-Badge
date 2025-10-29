@@ -1,0 +1,32 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node (example)   # remove or change if not using Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: |
+          # example for Node; change to your language
+          if [ -f package.json ]; then npm ci; fi
+
+      - name: Run tests
+        run: |
+          # put your test command here (example)
+          if [ -f package.json ]; then npm test || true; fi
+
+      - name: Simple success step
+        run: echo "CI pipeline ran — replace this with real tests"
